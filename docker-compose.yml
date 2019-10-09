@@ -1,0 +1,24 @@
+version: "3"
+services:
+  server:
+    image: trello-stats/backend
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      NODE_ENV: ${NODE_ENV}
+    command: [sh, -c, "yarn && yarn start"]
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+      - MONGODB_USER=${MONGODB_USER}
+      - MONGODB_PASS=${MONGODB_PASS}
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
