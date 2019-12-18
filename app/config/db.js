@@ -28,6 +28,8 @@ export const configureMongo = () => {
     logger.info('MongoDB disconnected')
     setTimeout(connectToMongo, 1500)
   })
+
+  connectToMongo()
 }
 
 export default configureMongo
